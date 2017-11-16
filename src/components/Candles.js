@@ -5,7 +5,7 @@ const Candles = (porops = {}) => {
   const { pair, data } = porops
   return (
     <div>
-      <h2>Symbol: {pair}</h2>
+      <h2>Exchange: {pair}</h2>
       <CustomChart data={data} />
     </div>
   )

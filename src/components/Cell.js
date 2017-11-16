@@ -2,7 +2,7 @@ import React from 'react'
 
 let basicStyle = {
   color: 'white',
-  display: 'inline-block',
+  display: 'block',
   padding: '5px'
 }
 
