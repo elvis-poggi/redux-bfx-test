@@ -30,20 +30,20 @@ class App extends Component {
     const { currentPair } = this.state
     return (
       <div className='App'>
-        <header>
-          <h1>Change pair subscription to: </h1>
+        <header style={{display: 'flex', justifyContent: 'left'}}>
+        <div style={{display: 'inline-block', width: '70%'}}>
+          <Candles pair={currentPair} />
+        </div>
+        <div style={{display: 'block'}}>
+          <TickerList data={tickers} />
+        </div>
+        </header>
+          <h1>Change exchange to: </h1>
           <button onClick={() => this.setPair('tBTCUSD')}> BTCUSD </button>
           <button onClick={() => this.setPair('tETCUSD')}> ETCUSD </button>
           <button onClick={() => this.setPair('tETHUSD')}> ETHUSD </button>
           <button onClick={() => this.setPair('tLTCUSD')}> LTCUSD </button>          
-        </header>
-        <div>
-          <Candles pair={currentPair} />
-        </div>
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
-          <div>
-            <TickerList data={tickers} />
-          </div>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left'}}>
           <div>
             <TradeList data={trades} />
           </div>
