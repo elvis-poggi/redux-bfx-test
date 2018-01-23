@@ -4,9 +4,8 @@ import Ask from './Ask'
 
 const style = {
   display: 'grid',
-  gridTemplateColumns: '90px 90px 120px',
-  textAlign: 'center',
-  border: '1px solid gray'
+  gridTemplateColumns: '105px 132px 105px',
+  textAlign: 'center'
 }
 
 const Asks = (props = {}) => {
@@ -15,11 +14,10 @@ const Asks = (props = {}) => {
 
   return (
     <div>
-      <p>ASKS</p>
       <div style={style}>
-        <Cell isHeader>PRICE</Cell>
-        <Cell isHeader>AMOUNT</Cell>
-        <Cell isHeader>COUNT</Cell>
+        <Cell>PRICE</Cell>
+        <Cell>AMOUNT</Cell>
+        <Cell>COUNT</Cell>
         {keys.map(key => (
           <Ask data={data[key]} key={key} />
     ))}

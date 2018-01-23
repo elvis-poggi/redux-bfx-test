@@ -1,20 +1,28 @@
 import React from 'react'
 
-let basicStyle = {
-  color: 'white',
-  display: 'block',
-  padding: '5px'
-}
-
 const Cell = (props = {}) => {
-  const { children, isHeader, hasColor, value } = props
+  const {
+    children,
+    isHeader,
+    align = 'center',
+    padding = '10px 5px'
+  } = props
+  const basicStyle = {
+    color: 'white',
+    display: 'block',
+    padding,
+    margin: '0',
+    textAlign: align,
+    fontWeight: '100'
+  }
   const style = isHeader
-    ? {...basicStyle, background: 'gray'}
-    : hasColor
-    ? (value > 0)
-      ? {...basicStyle, background: 'rgba(157, 194, 74, 1.73)'}
-      : {...basicStyle, background: 'rgba(225, 86, 86, 1.52)'}
-    : {...basicStyle, color: 'black'}
+      ? {
+        ...basicStyle,
+        background: 'linear-gradient(rgba(130, 130, 130, 0.21), rgb(57, 57, 57))',
+        fontWeight: '900',
+        textAlign: 'left'
+      }
+      : basicStyle
 
   return (
     <div style={style}> { children } </div>

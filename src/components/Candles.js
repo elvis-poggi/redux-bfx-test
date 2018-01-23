@@ -1,13 +1,15 @@
 import React from 'react'
 import CustomChart from './CustomChart'
+import Panel from './Panel'
+import Cell from './Cell'
 
 const Candles = (porops = {}) => {
-  const { pair, data } = porops
+  const { data } = porops
   return (
-    <div>
-      <h2>Exchange: {pair}</h2>
+    <Panel>
+      <Cell isHeader>CANDLES</Cell>
       <CustomChart data={data} />
-    </div>
+    </Panel>
   )
 }
 

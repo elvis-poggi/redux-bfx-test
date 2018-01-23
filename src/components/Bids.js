@@ -4,9 +4,8 @@ import Bid from './Bid'
 
 const style = {
   display: 'grid',
-  gridTemplateColumns: '90px 90px 120px',
-  textAlign: 'center',
-  border: '1px solid gray'
+  gridTemplateColumns: '105px 132px 105px',
+  textAlign: 'center'
 }
 
 const Bids = (props = {}) => {
@@ -15,11 +14,10 @@ const Bids = (props = {}) => {
 
   return (
     <div>
-      <p>BIDS</p>
       <div style={style}>
-        <Cell isHeader>COUNT</Cell>
-        <Cell isHeader>AMOUNT</Cell>
-        <Cell isHeader>PRICE</Cell>
+        <Cell>COUNT</Cell>
+        <Cell>AMOUNT</Cell>
+        <Cell>PRICE</Cell>
         {keys.map(key => (
           <Bid data={data[key]} key={key} />
     ))}

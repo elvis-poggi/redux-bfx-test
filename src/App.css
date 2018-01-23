@@ -3,3 +3,11 @@
   font-size: 12px;
 }
 
+p{
+  margin-left: 5px;
+}
+
+html{
+  background: #292929;
+  color: white;
+}
