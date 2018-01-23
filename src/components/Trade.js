@@ -1,11 +1,12 @@
 import React from 'react'
 import Cell from './Cell'
 import ColoredArrow from './ColoredArrow'
+import ColoredNumber from './ColoredNumber'
 
 const Trade = (props = {}) => {
   const { data = {} } = props
   return [
-    <Cell hasColor value={data.amount} key={data.symbol + '-Arrow'}>
+    <Cell key={data.symbol + '-Arrow'}>
       <ColoredArrow value={data.amount}>
         {
           (data.amount > 0)
@@ -14,13 +15,15 @@ const Trade = (props = {}) => {
         }
       </ColoredArrow>
     </Cell>,
-    <Cell hasColor value={data.amount} key={data.symbol + '-Time'}>
+    <Cell key={data.symbol + '-Time'}>
       {new Date(data.mts).toLocaleTimeString()}
     </Cell>,
-    <Cell hasColor value={data.amount} key={data.symbol + '-Price'}>
-      {data.price.toFixed(1)}
+    <Cell key={data.symbol + '-Price'}>
+      <ColoredNumber value={data.amount} >
+        {data.price.toFixed(1)}
+      </ColoredNumber>
     </Cell>,
-    <Cell hasColor value={data.amount} key={data.symbol + '-Amount'}>
+    <Cell key={data.symbol + '-Amount'}>
       {data.amount.toFixed(4)}
     </Cell>
   ]
