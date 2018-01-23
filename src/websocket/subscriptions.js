@@ -1,3 +1,4 @@
+import crypto from 'crypto-js'
 
 export function isSubscription (msg) {
   return (msg.event === 'subscribed')
@@ -5,6 +6,10 @@ export function isSubscription (msg) {
 
 export function isUnsub (msg) {
   return (msg.event === 'unsubscribed')
+}
+
+export function isAuth (msg) {
+  return (msg.event === 'auth')
 }
 
 let subscriptions = {}
@@ -31,19 +36,23 @@ export function digestUnsub (msg) {
   subscriptions[msg.chanId] = null
 }
 
-export function tickersSub (symbol) {
-  const symbols = [
-    'tBTCUSD',
-    'tETCUSD',
-    'tLTCUSD'
-  ]
-  symbols.map((symbol = 'tBTCUSD') => {
-    window.wsSend({
-      event: 'subscribe',
-      channel: 'ticker',
-      symbol: symbol
-    })
+// export function digestAuth (msg) {
+//   console.log('msg', msg)
+// }
+
+export function tickersSub (symbol = 'tBTCUSD') {
+  // const symbols = [
+  //   'tBTCUSD',
+  //   'tETCUSD',
+  //   'tLTCUSD'
+  // ]
+  // symbols.map((symbol) => {
+  window.wsSend({
+    event: 'subscribe',
+    channel: 'ticker',
+    symbol: symbol
   })
+  // })
 }
 
 export function tradesSub (symbol = 'tBTCUSD') {
@@ -83,6 +92,11 @@ export function unsubAll (ws) {
 }
 
 export function subscription (ws, pair) {
+  // const symbols = [
+  //   'tBTCUSD',
+  //   'tETCUSD',
+  //   'tLTCUSD'
+  // ]
   ws._send({
     'event': 'subscribe',
     'channel': 'candles',
@@ -93,6 +107,13 @@ export function subscription (ws, pair) {
     'channel': 'ticker',
     'symbol': pair
   })
+  // symbols.map((symbol) => {
+  //   ws._send({
+  //     event: 'subscribe',
+  //     channel: 'ticker',
+  //     symbol: symbol
+  //   })
+  // })
   ws._send({
     'event': 'subscribe',
     'channel': 'trades',
@@ -114,4 +135,25 @@ export function wsCheck (ws) {
   } else {
     setTimeout(() => wsCheck(ws), 1000)
   }
+}
+
+export function digestAuth (ws) {
+  const apiKey = 'rVyRnatmcKbcLfoZw22Y5hGvxcaddGVWsFb6sZBKnDq'
+  const apiSecret = '2UyW6H9euEEWPKQMD1VC1rllTf5Cw4o3d0u1AKipLZx'
+
+  const authNonce = Date.now() * 1000
+  const authPayload = 'AUTH' + authNonce
+  const authSig = crypto
+  .HmacSHA384(authPayload, apiSecret)
+  .toString(crypto.enc.Hex)
+
+  const payload = {
+    apiKey,
+    authSig,
+    authNonce,
+    authPayload,
+    event: 'auth'
+  }
+
+  ws._send(JSON.stringify(payload))
 }
