@@ -46,7 +46,7 @@ export function candleAdapter (rawData = []) {
   return result
 }
 
-const MAX_LENGTH = 20
+const MAX_LENGTH = 25
 
 export function filterTrades (data) {
   const sortedData = reverse(sortBy(data, 'mts'))
