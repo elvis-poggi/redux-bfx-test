@@ -6,10 +6,10 @@ const ColoredNumber = (props = {}) => {
   let style = {}
 
   if (value < 0) {
-    style.color = 'red'
+    style.color = '#ff0000c9'
   }
   if (value > 0) {
-    style.color = 'green'
+    style.color = '#008000bd'
   }
   return (
     <span style={style}>{children}</span>
